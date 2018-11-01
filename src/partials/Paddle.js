@@ -3,7 +3,7 @@ import {
 } from '../settings';
 
 export default class Paddle {
-  constructor(boardHeight, width, height, x, y) {
+  constructor(boardHeight, width, height, x, y, up, down) {
     this.boardHeight = boardHeight;
     this.width = width;
     this.height = height;
@@ -11,8 +11,33 @@ export default class Paddle {
     this.y = y;
     this.speed = 10;
     this.score = 0;
-  }
+
+    // add key listener
+    document.addEventListener("keydown", event => {
+      switch (event.key) {
+        case up:
+          this.up();
+          break;
+        case down:
+          this.down();
+          break;
+      }
+    });
+  } // end of constructor
   //...
+
+  // create up method
+  up() {
+    console.log('up');
+    this.y = this.y - this.speed;
+  }
+
+  // create down method
+  down() {
+    console.log('down');
+    this.y += this.speed;
+  }
+
   // have to pass svg through render(svg) in order to have access to it and use it in svg.appendChild();
   render(svg) {
     // create a paddle

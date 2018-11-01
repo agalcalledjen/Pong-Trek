@@ -37,7 +37,7 @@ export default class Game {
       KEYS.z
     );
     // to check for the paddle in the console
-    console.log(this.player1);
+    // console.log(this.player1);
 
     // create new player(second) from Paddle class
     this.player2 = new Paddle(
@@ -52,7 +52,7 @@ export default class Game {
       KEYS.down
     );
     // to check for the paddle in the console
-    console.log(this.player2);
+    // console.log(this.player2);
 
     // Other code goes here...
     this.gameElement = document.getElementById(this.element);
