@@ -10,6 +10,7 @@ import {
   SVG_NS,
   KEYS
 } from '../settings';
+import Ball from './Ball';
 
 export default class Game {
 
@@ -24,6 +25,11 @@ export default class Game {
     this.paddleWidth = 8;
     this.paddleHeight = 56;
     this.boardGap = 10;
+
+    // ball
+    this.radius = 8;
+    this.boardWidth = (this.boardWidth / 2);
+    this.boardHeight = (this.boardHeight / 2);
 
     // create new player(first) from Paddle class
     this.player1 = new Paddle(
@@ -57,6 +63,15 @@ export default class Game {
     // Other code goes here...
     this.gameElement = document.getElementById(this.element);
     this.board = new Board(this.width, this.height);
+
+    // create new ball from ball class
+    this.ball = new Ball(
+      this.radius,
+      // board width
+      this.width,
+      // board height
+      this.height,
+    );
   } // end of constructor
 
   render() {
@@ -74,6 +89,7 @@ export default class Game {
     this.board.render(svg);
     this.player1.render(svg);
     this.player2.render(svg);
+    this.ball.render(svg);
   }
 
 }

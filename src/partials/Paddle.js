@@ -13,7 +13,7 @@ export default class Paddle {
     this.score = 0;
 
     // add key listener
-    document.addEventListener("keydown", event => {
+    document.addEventListener('keydown', event => {
       switch (event.key) {
         case up:
           this.up();
@@ -28,14 +28,14 @@ export default class Paddle {
 
   // create up method
   up() {
-    console.log('up');
-    this.y = this.y - this.speed;
+    // console.log('up');
+    this.y = Math.max(0, [this.y - this.speed]);
   }
 
   // create down method
   down() {
-    console.log('down');
-    this.y += this.speed;
+    // console.log('down');
+    this.y = Math.min([this.boardHeight - this.height], [this.y + this.speed]);
   }
 
   // have to pass svg through render(svg) in order to have access to it and use it in svg.appendChild();
