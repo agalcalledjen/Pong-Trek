@@ -92,7 +92,6 @@ export default class Game {
       return;
     }
 
-
     // before we append it, we must empty out any html inside the this.element
     this.gameElement.innerHTML = '';
     // let's add svg markup
@@ -106,7 +105,7 @@ export default class Game {
     this.board.render(svg);
     this.player1.render(svg);
     this.player2.render(svg);
-    this.ball.render(svg);
+    this.ball.render(svg, this.player1, this.player2);
   }
 
 }

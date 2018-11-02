@@ -43,7 +43,28 @@ export default class Ball {
     }
   }
 
-  render(svg) {
+  // paddle collision method
+  paddleCollision(player1, player2) {
+    if (this.vx > 0) {
+      // this is for the left paddle
+      let paddle = player2.coordinates(player2.x, player2.y, player2.width, player2.height); // this will help us find coordinates of the paddle
+      // obj deconstructing, these values in array will rep paddle's coordinates
+      let [leftX, rightX, topY, bottomY] = paddle;
+
+      if (
+        (this.x + this.radius >= leftX) &&
+        (this.x + this.radius <= rightX) &&
+        (this.y >= topY && this.y <= bottomY)
+      ) {
+        this.vx = -this.vx;
+        // same as this.vx += -1;
+      }
+    } else {
+
+    }
+  }
+
+  render(svg, player1, player2) {
     // adds acceleration
     // this.vx += this.ax;
     // this.vy += this.ay;
@@ -53,6 +74,8 @@ export default class Ball {
 
     // run wallCollision method
     this.wallCollision();
+    // run paddleCollision method
+    this.paddleCollision(player1, player2);
 
     // 'circle' has to be the actual svg name element not the name we create 
     // create a ball

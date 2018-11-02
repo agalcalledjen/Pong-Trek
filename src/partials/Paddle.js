@@ -38,6 +38,15 @@ export default class Paddle {
     this.y = Math.min([this.boardHeight - this.height], [this.y + this.speed]);
   }
 
+  // helper to find coordinates
+  coordinates(x, y, width, height) {
+    let leftX = x;
+    let rightX = x + width;
+    let topY = y;
+    let bottomY = y + height;
+    return [leftX, rightX, topY, bottomY];
+  }
+
   // have to pass svg through render(svg) in order to have access to it and use it in svg.appendChild();
   render(svg) {
     // create a paddle
