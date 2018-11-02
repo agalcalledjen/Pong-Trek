@@ -60,7 +60,19 @@ export default class Ball {
         // same as this.vx += -1;
       }
     } else {
+      // experiment with different values to improve collision detection
+      // for player 1
+      let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height);
+      // obj deconstructor
+      let [leftX, rightX, topY, bottomY] = paddle;
 
+      if (
+        (this.x - this.radius <= rightX) &&
+        (this.x - this.radius >= leftX) &&
+        (this.y >= topY && this.y <= bottomY)
+      ) {
+        this.vx = -this.vx;
+      }
     }
   }
 
