@@ -10,6 +10,10 @@ export default class Ball {
     this.direction = 1;
     // this will set the ball in the middle in the beginning of the game
     this.reset();
+
+    // add sound
+    this.ping = new Audio('public/sounds/pong-01.wav');
+
   } // end of constructor
   // create reset
   reset() {
@@ -57,6 +61,7 @@ export default class Ball {
         (this.y >= topY && this.y <= bottomY)
       ) {
         this.vx = -this.vx;
+        this.ping.play();
         // same as this.vx += -1;
       }
     } else {
@@ -72,14 +77,36 @@ export default class Ball {
         (this.y >= topY && this.y <= bottomY)
       ) {
         this.vx = -this.vx;
+        this.ping.play();
       }
     }
+  }
+
+  goal(player) {
+    // this.score is in paddle
+    // console.log(); player point eg. which player and using ++
+    player.score++; // updates score
+    this.reset();
+    // console.log(player.score);
   }
 
   render(svg, player1, player2) {
     // adds acceleration
     // this.vx += this.ax;
     // this.vy += this.ay;
+
+    // check if the ball goes off the board to the right or the left
+    // and call a goal method
+    const rightGoal = this.x + this.radius >= this.boardWidth;
+    const leftGoal = this.x - this.radius <= 0;
+
+    if (rightGoal) {
+      this.goal(player1);
+      this.direction = -1; // if this person scores, the ball will go to the other player after the reset
+    } else if (leftGoal) {
+      this.goal(player2);
+      this.direction = 1;
+    }
 
     this.x += this.vx;
     this.y += this.vy;

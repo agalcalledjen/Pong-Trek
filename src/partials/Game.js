@@ -11,6 +11,7 @@ import {
   KEYS
 } from '../settings';
 import Ball from './Ball';
+import Score from './Score';
 
 export default class Game {
 
@@ -40,7 +41,8 @@ export default class Game {
       // this is how we center the y position of the paddle
       ((this.height - this.paddleHeight) / 2),
       KEYS.a,
-      KEYS.z
+      KEYS.z,
+      'player1'
     );
     // to check for the paddle in the console
     // console.log(this.player1);
@@ -55,7 +57,8 @@ export default class Game {
       // this is how we center the y position of the paddle
       ((this.height - this.paddleHeight) / 2),
       KEYS.up, // must use KEYS to access those in settings.js
-      KEYS.down
+      KEYS.down,
+      'player2'
     );
     // to check for the paddle in the console
     // console.log(this.player2);
@@ -72,6 +75,19 @@ export default class Game {
       // board height
       this.height,
     );
+
+    // create new ball from ball class
+    this.ball2 = new Ball(
+      this.radius,
+      // board width
+      this.width,
+      // board height
+      this.height,
+    );
+
+    // to create score instance variables
+    this.score1 = new Score(this.width / 2 - 50, 30, 30);
+    this.score2 = new Score(this.width / 2 + 28, 30, 30);
 
     // add key listener for spacebar
     // add an instance variable called this.pause
@@ -106,6 +122,8 @@ export default class Game {
     this.player1.render(svg);
     this.player2.render(svg);
     this.ball.render(svg, this.player1, this.player2);
+    this.ball2.render(svg, this.player1, this.player2);
+    this.score1.render(svg, this.player1.score);
+    this.score2.render(svg, this.player2.score);
   }
-
 }
