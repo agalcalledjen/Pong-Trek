@@ -54,7 +54,7 @@ export default class Game {
       (this.width - this.boardGap - this.paddleWidth),
       // this is how we center the y position of the paddle
       ((this.height - this.paddleHeight) / 2),
-      KEYS.up,
+      KEYS.up, // must use KEYS to access those in settings.js
       KEYS.down
     );
     // to check for the paddle in the console
@@ -72,10 +72,27 @@ export default class Game {
       // board height
       this.height,
     );
+
+    // add key listener for spacebar
+    // add an instance variable called this.pause
+    // use the variable to change the value either true or false
+    document.addEventListener('keydown', event => {
+      switch (event.key) {
+        case KEYS.spaceBar:
+          this.pause = !this.pause; // flips value of true to false and vice versa
+          break;
+      }
+    });
   } // end of constructor
 
   render() {
     // More code goes here...
+    // add pause here
+    if (this.pause) {
+      return;
+    }
+
+
     // before we append it, we must empty out any html inside the this.element
     this.gameElement.innerHTML = '';
     // let's add svg markup
