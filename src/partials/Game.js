@@ -20,6 +20,7 @@ export default class Game {
     this.element = element;
     this.width = width;
     this.height = height;
+    this.winGoal = 3;
 
     // create a few instance variables
     // we are not passing them through our constructor
@@ -76,12 +77,10 @@ export default class Game {
       this.height,
     );
 
-    // create new ball from ball class
+    // create second ball from ball class
     this.ball2 = new Ball(
       this.radius,
-      // board width
       this.width,
-      // board height
       this.height,
     );
 
@@ -99,6 +98,12 @@ export default class Game {
           break;
       }
     });
+
+    // add bg sound
+    this.bgSound = new Audio('public/sounds/closing-credits.wav');
+
+    // add finish sound
+    this.finish = new Audio('public/sounds/spock-livelong.wav');
   } // end of constructor
 
   render() {
@@ -125,5 +130,28 @@ export default class Game {
     this.ball2.render(svg, this.player1, this.player2);
     this.score1.render(svg, this.player1.score);
     this.score2.render(svg, this.player2.score);
+
+    // create winner text
+    const pongGame = document.getElementById('game');
+    const winner = document.createElement('p');
+
+    if (this.player1.score === this.winGoal) {
+      pongGame.appendChild(winner).innerHTML = 'Player 1 wins!';
+      this.finish.play();
+
+      setTimeout(function () {
+        document.location.reload();
+      }, 1400);
+    } else if (this.player2.score === this.winGoal) {
+      pongGame.appendChild(winner).innerHTML = 'Player 2 wins!';
+      this.finish.play();
+
+      setTimeout(function () {
+        document.location.reload();
+      }, 1400);
+    } else {
+      pongGame.appendChild(winner).innerHTML = 'Live long and prosper!';
+      this.bgSound.play();
+    }
   }
 }

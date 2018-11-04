@@ -66,21 +66,23 @@ export default class Paddle {
 
   // have to pass svg through render(svg) in order to have access to it and use it in svg.appendChild();
   render(svg) {
-    if (this.keyState[this.keyUp] && this.player === 'player1') {
-      this.up();
-    }
-    if (this.keyState[this.keyDown] && this.player === 'player1') {
-      this.down();
-    }
-    if (this.keyState[this.keyUp] && this.player === 'player2') {
-      this.up();
-    }
-    if (this.keyState[this.keyDown] && this.player === 'player2') {
-      this.down();
-    }
 
-    // create a paddle
-    // alright to use rect again since it is scoped to this class and is contained within render method, it is not global
+
+
+    // if (this.keyState[this.keyUp] && this.player === 'player1') {
+    //   this.up();
+    // }
+    // if (this.keyState[this.keyDown] && this.player === 'player1') {
+    //   this.down();
+    // }
+    // if (this.keyState[this.keyUp] && this.player === 'player2') {
+    //   this.up();
+    // }
+    // if (this.keyState[this.keyDown] && this.player === 'player2') {
+    //   this.down();
+    // }
+
+    // create a brick
     let rect = document.createElementNS(SVG_NS, 'rect');
     rect.setAttributeNS(null, 'fill', '#ffffff');
     rect.setAttributeNS(null, 'width', this.width);
@@ -89,9 +91,6 @@ export default class Paddle {
     rect.setAttributeNS(null, 'x', this.x);
     // y of the top left corner
     rect.setAttributeNS(null, 'y', this.y);
-    // to make paddles rounded
-    rect.setAttributeNS(null, 'rx', 5);
-    rect.setAttributeNS(null, 'ry', 5);
 
     svg.appendChild(rect);
   }

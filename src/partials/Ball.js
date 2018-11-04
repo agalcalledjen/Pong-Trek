@@ -12,7 +12,7 @@ export default class Ball {
     this.reset();
 
     // add sound
-    this.ping = new Audio('public/sounds/pong-01.wav');
+    this.ping = new Audio('public/sounds/photon-torpedo.wav');
 
   } // end of constructor
   // create reset
@@ -86,8 +86,17 @@ export default class Ball {
     // this.score is in paddle
     // console.log(); player point eg. which player and using ++
     player.score++; // updates score
-    this.reset();
+    // player.height -= 1; // make paddle smaller
+
     // console.log(player.score);
+    // if (player.score === this.winGoal) {
+    //   setInterval(function () {
+    //     alert('Winner!');
+    //     document.location.reload();
+    //   }, 1000);
+    // }
+
+    this.reset();
   }
 
   render(svg, player1, player2) {
