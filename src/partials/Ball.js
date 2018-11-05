@@ -105,7 +105,7 @@ export default class Ball {
 
   goal(player) {
     player.score++;
-    player.height -= 2;
+    // player.height -= 2;
     this.reset();
   }
 
