@@ -54,7 +54,7 @@ export default class Ball {
         (this.y >= topY && this.y <= bottomY)
       ) {
         // ball value will flip and speed will increase
-        this.vx = -this.vx * 1.05;
+        this.vx = -this.vx * 1.5;
         this.ping.play();
       }
     } else {
@@ -67,7 +67,7 @@ export default class Ball {
         (this.x - this.radius >= leftX) &&
         (this.y >= topY && this.y <= bottomY)
       ) {
-        this.vx = -this.vx * 1.05;
+        this.vx = -this.vx * 1.5;
         this.ping.play();
       }
     }
@@ -105,7 +105,7 @@ export default class Ball {
 
   goal(player) {
     player.score++;
-
+    player.height -= 2;
     this.reset();
   }
 
