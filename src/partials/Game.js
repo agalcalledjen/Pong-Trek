@@ -12,6 +12,7 @@ import {
 } from '../settings';
 import Ball from './Ball';
 import Score from './Score';
+import Brick from './Brick';
 
 export default class Game {
 
@@ -22,16 +23,37 @@ export default class Game {
     this.height = height;
     this.winGoal = 3;
 
-    // create a few instance variables
+    // create a few instance variables  
+
+    // create bricks
+    this.brickWidth = 8;
+    this.brickHeight = 56;
+    this.boardGap0 = 30;
+
+    this.brick1 = new Brick(
+      this.height,
+      this.brickWidth,
+      this.brickHeight,
+      this.boardGap0,
+      // this is how we center the y position of the paddle
+      ((this.height - this.brickHeight) / 2),
+      'brick1'
+    );
+
+    this.brick2 = new Brick(
+      this.height,
+      this.brickWidth,
+      this.brickHeight,
+      (this.width - this.boardGap0 - this.brickWidth),
+      // this is how we center the y position of the paddle
+      ((this.height - this.brickHeight) / 2),
+      'brick2'
+    );
+
     // we are not passing them through our constructor
     this.paddleWidth = 8;
     this.paddleHeight = 56;
     this.boardGap = 10;
-
-    // ball
-    this.radius = 8;
-    this.boardWidth = (this.boardWidth / 2);
-    this.boardHeight = (this.boardHeight / 2);
 
     // create new player(first) from Paddle class
     this.player1 = new Paddle(
@@ -63,6 +85,11 @@ export default class Game {
     );
     // to check for the paddle in the console
     // console.log(this.player2);
+
+    // ball
+    this.radius = 8;
+    this.boardWidth = (this.boardWidth / 2);
+    this.boardHeight = (this.boardHeight / 2);
 
     // Other code goes here...
     this.gameElement = document.getElementById(this.element);
@@ -115,6 +142,7 @@ export default class Game {
 
     // before we append it, we must empty out any html inside the this.element
     this.gameElement.innerHTML = '';
+
     // let's add svg markup
     let svg = document.createElementNS(SVG_NS, 'svg');
     // use null to not have to pass in a name
@@ -126,8 +154,10 @@ export default class Game {
     this.board.render(svg);
     this.player1.render(svg);
     this.player2.render(svg);
-    this.ball.render(svg, this.player1, this.player2);
-    this.ball2.render(svg, this.player1, this.player2);
+    this.brick1.render(svg);
+    this.brick2.render(svg);
+    this.ball.render(svg, this.player1, this.player2, this.brick1, this.brick2);
+    this.ball2.render(svg, this.player1, this.player2, this.brick1, this.brick2);
     this.score1.render(svg, this.player1.score);
     this.score2.render(svg, this.player2.score);
 
@@ -138,6 +168,8 @@ export default class Game {
     if (this.player1.score === this.winGoal) {
       pongGame.appendChild(winner).innerHTML = 'Player 1 wins!';
       this.finish.play();
+      // this.ball.stop();
+      // this.ball2.stop();
 
       setTimeout(function () {
         document.location.reload();
@@ -145,6 +177,8 @@ export default class Game {
     } else if (this.player2.score === this.winGoal) {
       pongGame.appendChild(winner).innerHTML = 'Player 2 wins!';
       this.finish.play();
+      // this.ball.stop();
+      // this.ball2.stop();
 
       setTimeout(function () {
         document.location.reload();

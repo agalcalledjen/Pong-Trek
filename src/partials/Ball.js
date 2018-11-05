@@ -82,6 +82,39 @@ export default class Ball {
     }
   }
 
+  brickCollision(brick1, brick2) {
+    if (this.vx > 0) {
+      // this is for the left brick
+      let brick = brick2.coordinates(brick2.x, brick2.y, brick2.width, brick2.height); // this will help us find coordinates of the paddle
+      // obj deconstructing, these values in array will rep brick's coordinates
+      let [leftX, rightX, topY, bottomY] = brick;
+
+      if (
+        (this.x + this.radius >= leftX) &&
+        (this.x + this.radius <= rightX) &&
+        (this.y >= topY && this.y <= bottomY)
+      ) {
+        this.vx = -this.vx;
+        this.ping.play();
+        // same as this.vx += -1;
+      }
+    } else {
+      // for brick 1
+      let brick = brick1.coordinates(brick1.x, brick1.y, brick1.width, brick1.height);
+      // obj deconstructor
+      let [leftX, rightX, topY, bottomY] = brick;
+
+      if (
+        (this.x - this.radius <= rightX) &&
+        (this.x - this.radius >= leftX) &&
+        (this.y >= topY && this.y <= bottomY)
+      ) {
+        this.vx = -this.vx;
+        this.ping.play();
+      }
+    }
+  }
+
   goal(player) {
     // this.score is in paddle
     // console.log(); player point eg. which player and using ++
@@ -99,7 +132,7 @@ export default class Ball {
     this.reset();
   }
 
-  render(svg, player1, player2) {
+  render(svg, player1, player2, brick1, brick2) {
     // adds acceleration
     // this.vx += this.ax;
     // this.vy += this.ay;
@@ -124,6 +157,8 @@ export default class Ball {
     this.wallCollision();
     // run paddleCollision method
     this.paddleCollision(player1, player2);
+    // run brickCollision method
+    this.brickCollision(brick1, brick2);
 
     // 'circle' has to be the actual svg name element not the name we create 
     // create a ball
@@ -134,6 +169,8 @@ export default class Ball {
     circle.setAttributeNS(null, 'cx', this.x);
     // y of the centre point
     circle.setAttributeNS(null, 'cy', this.y);
+    // specifies total length of path
+    // circle.setAttributeNS(null, 'pathLength', '20');
 
     svg.appendChild(circle);
   }

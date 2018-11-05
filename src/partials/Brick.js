@@ -2,8 +2,8 @@ import {
   SVG_NS
 } from '../settings';
 
-export default class Paddle {
-  constructor(boardHeight, width, height, x, y, up, down, player) {
+export default class Brick {
+  constructor(boardHeight, width, height, x, y) {
     this.boardHeight = boardHeight;
     this.width = width;
     this.height = height;
@@ -12,47 +12,18 @@ export default class Paddle {
     this.speed = 10;
     this.score = 0;
 
-    this.keyUp = up;
-    this.keyDown = down;
-
-    this.player = player;
-    // keeping track of keys pressed
-    this.keyState = {};
-
-    // when key is pressed down, it will be true
-    document.addEventListener('keydown', event => {
-      this.keyState[event.key || event.which] = true;
-    }, true);
-
-    // when key is up, it will be false
-    document.addEventListener('keyup', event => {
-      this.keyState[event.key || event.which] = false;
-    }, false);
-
-    // add key listener
-    // document.addEventListener('keydown', event => {
-    //   switch (event.key) {
-    //     case up:
-    //       this.up();
-    //       break;
-    //     case down:
-    //       this.down();
-    //       break;
-    //   }
-    // });
+    this.reset();
   } // end of constructor
-  //...
+  // create reset
+  reset() {
+    // this.x = this.boardWidth / 4;
+    this.y = this.boardHeight / 2;
 
-  // create up method
-  up() {
-    // console.log('up');
-    this.y = Math.max(0, [this.y - this.speed]);
-  }
-
-  // create down method
-  down() {
-    // console.log('down');
-    this.y = Math.min([this.boardHeight - this.height], [this.y + this.speed]);
+    // vectors
+    this.vy = 0;
+    while (this.vy === 0) {
+      this.vy = Math.floor(Math.random() * 10 - 5);
+    }
   }
 
   // helper to find coordinates
@@ -64,23 +35,26 @@ export default class Paddle {
     return [leftX, rightX, topY, bottomY];
   }
 
-  // have to pass svg through render(svg) in order to have access to it and use it in svg.appendChild();
+  // create wall collision to detect ceiling and floor
+  wallCollision() {
+    // const hitLeft = this.x - this.radius <= 0;
+    // const hitRight = this.x + this.radius >= this.boardWidth;
+    const hitTop = this.y <= 0;
+    const hitBottom = this.y + this.height >= this.boardHeight;
+
+    if (hitTop || hitBottom) {
+      // this.ay += -1;
+      this.vy = -this.vy;
+    }
+  }
+
+  // draw svg
   render(svg) {
 
+    this.y += this.vy;
 
-
-    // if (this.keyState[this.keyUp] && this.player === 'player1') {
-    //   this.up();
-    // }
-    // if (this.keyState[this.keyDown] && this.player === 'player1') {
-    //   this.down();
-    // }
-    // if (this.keyState[this.keyUp] && this.player === 'player2') {
-    //   this.up();
-    // }
-    // if (this.keyState[this.keyDown] && this.player === 'player2') {
-    //   this.down();
-    // }
+    // run wallCollision method
+    this.wallCollision();
 
     // create a brick
     let rect = document.createElementNS(SVG_NS, 'rect');
