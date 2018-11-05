@@ -9,14 +9,11 @@ export default class Brick {
     this.height = height;
     this.x = x;
     this.y = y;
-    this.speed = 10;
-    this.score = 0;
 
     this.reset();
   } // end of constructor
-  // create reset
+  // resets position of bricks
   reset() {
-    // this.x = this.boardWidth / 4;
     this.y = this.boardHeight / 2;
 
     // vectors
@@ -35,15 +32,12 @@ export default class Brick {
     return [leftX, rightX, topY, bottomY];
   }
 
-  // create wall collision to detect ceiling and floor
+  // wall collision to detect ceiling and floor
   wallCollision() {
-    // const hitLeft = this.x - this.radius <= 0;
-    // const hitRight = this.x + this.radius >= this.boardWidth;
     const hitTop = this.y <= 0;
     const hitBottom = this.y + this.height >= this.boardHeight;
 
     if (hitTop || hitBottom) {
-      // this.ay += -1;
       this.vy = -this.vy;
     }
   }
@@ -53,17 +47,14 @@ export default class Brick {
 
     this.y += this.vy;
 
-    // run wallCollision method
     this.wallCollision();
 
-    // create a brick
+    // draw brick
     let rect = document.createElementNS(SVG_NS, 'rect');
     rect.setAttributeNS(null, 'fill', '#ffffff');
     rect.setAttributeNS(null, 'width', this.width);
     rect.setAttributeNS(null, 'height', this.height);
-    // x of the top left corner
     rect.setAttributeNS(null, 'x', this.x);
-    // y of the top left corner
     rect.setAttributeNS(null, 'y', this.y);
 
     svg.appendChild(rect);

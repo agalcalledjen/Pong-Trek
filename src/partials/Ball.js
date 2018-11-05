@@ -8,22 +8,18 @@ export default class Ball {
     this.boardWidth = boardWidth;
     this.boardHeight = boardHeight;
     this.direction = 1;
-    // this will set the ball in the middle in the beginning of the game
+
     this.reset();
 
-    // add sound
+    // sounds
     this.ping = new Audio('public/sounds/photon-torpedo.wav');
+    this.block = new Audio('public/sounds/computer-06.wav');
 
   } // end of constructor
-  // create reset
+  // resets position 
   reset() {
-    // to set acceleration
-    // this.ax = 0.1;
-    // this.ay = 0.1;
-
     this.x = this.boardWidth / 2;
     this.y = this.boardHeight / 2;
-    // vectors
     this.vy = 0;
     while (this.vy === 0) {
       this.vy = Math.floor(Math.random() * 10 - 5);
@@ -31,7 +27,6 @@ export default class Ball {
     this.vx = this.direction * (6 - Math.abs(this.vy));
   }
 
-  // create wall collision, creates true and false stmts 
   wallCollision() {
     const hitLeft = this.x - this.radius <= 0;
     const hitRight = this.x + this.radius >= this.boardWidth;
@@ -47,12 +42,10 @@ export default class Ball {
     }
   }
 
-  // paddle collision method
   paddleCollision(player1, player2) {
     if (this.vx > 0) {
-      // this is for the left paddle
-      let paddle = player2.coordinates(player2.x, player2.y, player2.width, player2.height); // this will help us find coordinates of the paddle
-      // obj deconstructing, these values in array will rep paddle's coordinates
+      // right paddle
+      let paddle = player2.coordinates(player2.x, player2.y, player2.width, player2.height);
       let [leftX, rightX, topY, bottomY] = paddle;
 
       if (
@@ -60,15 +53,13 @@ export default class Ball {
         (this.x + this.radius <= rightX) &&
         (this.y >= topY && this.y <= bottomY)
       ) {
-        this.vx = -this.vx;
+        // ball value will flip and speed will increase
+        this.vx = -this.vx * 1.05;
         this.ping.play();
-        // same as this.vx += -1;
       }
     } else {
-      // experiment with different values to improve collision detection
-      // for player 1
+      // left paddle
       let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height);
-      // obj deconstructor
       let [leftX, rightX, topY, bottomY] = paddle;
 
       if (
@@ -76,7 +67,7 @@ export default class Ball {
         (this.x - this.radius >= leftX) &&
         (this.y >= topY && this.y <= bottomY)
       ) {
-        this.vx = -this.vx;
+        this.vx = -this.vx * 1.05;
         this.ping.play();
       }
     }
@@ -84,9 +75,8 @@ export default class Ball {
 
   brickCollision(brick1, brick2) {
     if (this.vx > 0) {
-      // this is for the left brick
-      let brick = brick2.coordinates(brick2.x, brick2.y, brick2.width, brick2.height); // this will help us find coordinates of the paddle
-      // obj deconstructing, these values in array will rep brick's coordinates
+      // right brick
+      let brick = brick2.coordinates(brick2.x, brick2.y, brick2.width, brick2.height);
       let [leftX, rightX, topY, bottomY] = brick;
 
       if (
@@ -95,13 +85,11 @@ export default class Ball {
         (this.y >= topY && this.y <= bottomY)
       ) {
         this.vx = -this.vx;
-        this.ping.play();
-        // same as this.vx += -1;
+        this.block.play();
       }
     } else {
-      // for brick 1
+      // left brick
       let brick = brick1.coordinates(brick1.x, brick1.y, brick1.width, brick1.height);
-      // obj deconstructor
       let [leftX, rightX, topY, bottomY] = brick;
 
       if (
@@ -110,41 +98,25 @@ export default class Ball {
         (this.y >= topY && this.y <= bottomY)
       ) {
         this.vx = -this.vx;
-        this.ping.play();
+        this.block.play();
       }
     }
   }
 
   goal(player) {
-    // this.score is in paddle
-    // console.log(); player point eg. which player and using ++
-    player.score++; // updates score
-    // player.height -= 1; // make paddle smaller
-
-    // console.log(player.score);
-    // if (player.score === this.winGoal) {
-    //   setInterval(function () {
-    //     alert('Winner!');
-    //     document.location.reload();
-    //   }, 1000);
-    // }
+    player.score++;
 
     this.reset();
   }
 
+  // draw ball
   render(svg, player1, player2, brick1, brick2) {
-    // adds acceleration
-    // this.vx += this.ax;
-    // this.vy += this.ay;
-
-    // check if the ball goes off the board to the right or the left
-    // and call a goal method
     const rightGoal = this.x + this.radius >= this.boardWidth;
     const leftGoal = this.x - this.radius <= 0;
 
     if (rightGoal) {
       this.goal(player1);
-      this.direction = -1; // if this person scores, the ball will go to the other player after the reset
+      this.direction = -1;
     } else if (leftGoal) {
       this.goal(player2);
       this.direction = 1;
@@ -153,25 +125,27 @@ export default class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
-    // run wallCollision method
+    // run these methods
     this.wallCollision();
-    // run paddleCollision method
     this.paddleCollision(player1, player2);
-    // run brickCollision method
     this.brickCollision(brick1, brick2);
 
-    // 'circle' has to be the actual svg name element not the name we create 
     // create a ball
     let circle = document.createElementNS(SVG_NS, 'circle');
     circle.setAttributeNS(null, 'r', this.radius);
     circle.setAttributeNS(null, 'fill', '#ffffff');
-    // x of the centre point
     circle.setAttributeNS(null, 'cx', this.x);
-    // y of the centre point
     circle.setAttributeNS(null, 'cy', this.y);
-    // specifies total length of path
-    // circle.setAttributeNS(null, 'pathLength', '20');
+
+    let circle1 = document.createElementNS(SVG_NS, 'circle');
+    circle1.setAttributeNS(null, 'r', '6');
+    circle1.setAttributeNS(null, 'fill', '#ffffff');
+    circle1.setAttributeNS(null, 'cx', this.x);
+    circle1.setAttributeNS(null, 'cy', this.y);
+    circle1.setAttributeNS(null, 'stroke', '#000000');
+    circle1.setAttributeNS(null, 'stroke-width', '2');
 
     svg.appendChild(circle);
+    svg.appendChild(circle1);
   }
 }

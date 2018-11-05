@@ -7,16 +7,14 @@ export default class Score {
     this.x = x;
     this.y = y;
     this.size = size;
-  }
-  //...
+  } // end of constructor
   render(svg, score) {
+    // draw score
     let text = document.createElementNS(SVG_NS, 'text');
 
-    // set attributes for x and y
-    // set attributes for color, etc
     text.setAttributeNS(null, 'x', this.x);
     text.setAttributeNS(null, 'y', this.y);
-    text.setAttributeNS(null, 'font-family', '"Silkscreen web", monotype');
+    text.setAttributeNS(null, 'font-family', '"Roddenberry", sans-serif');
     text.setAttributeNS(null, 'font-size', this.size);
     text.setAttributeNS(null, 'fill', 'white');
     text.textContent = score;
