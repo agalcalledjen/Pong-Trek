@@ -89,7 +89,7 @@ export default class Game {
 
     // scores
     this.score1 = new Score(this.width / 2 - 50, 30, 30);
-    this.score2 = new Score(this.width / 2 + 28, 30, 30);
+    this.score2 = new Score(this.width / 2 + 40, 30, 30);
 
     // key listener for spacebar
     document.addEventListener('keydown', event => {

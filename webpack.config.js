@@ -26,6 +26,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|jpg)$/,
+        loader: "url-loader"
+      },
+      {
         test: /\.js$/,
         enforce: 'pre',
         loader: 'eslint-loader?configFile=.eslintrc',

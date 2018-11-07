@@ -105,7 +105,8 @@ export default class Ball {
 
   goal(player) {
     player.score++;
-    // player.height -= 2;
+    // shrink paddle
+    player.height -= 2;
     this.reset();
   }
 

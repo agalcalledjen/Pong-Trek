@@ -180,3 +180,56 @@ p {
   margin-top: 1rem;
   text-align: center;
 }
+
+/* stars */
+.stars,
+.stars2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stars {
+  background: #000 url('../../public/images/stars.jpg') repeat top center;
+  z-index: -2;
+}
+
+.stars2 {
+  background: transparent url('../../public/images/stars2.jpg') repeat top center;
+  z-index: -1;
+
+  animation: makeItSo 200s linear infinite;
+}
+
+@keyframes makeItSo {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+/* .pong-ball {
+  animation: change 2s linear infinite;
+} */
+/* 
+@keyframes change {
+  0% {
+    fill: red;
+  }
+
+  50% {
+    fill: blue;
+  }
+
+  75% {
+    fill: green;
+  }
+} */
