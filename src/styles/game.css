@@ -110,7 +110,6 @@ section {
 body {
   line-height: 1;
   background-image: linear-gradient(to bottom, #0f2027 0%, #203a43 50%, #2c5364 100%);
-  /* background-image: radial-gradient(ellipse at bottom, #0f2027 0%, #203a43 100%); */
 }
 
 ol,
@@ -167,6 +166,7 @@ body {
   height: 100vh;
   justify-content: center;
   width: 100%;
+  background-color: #000;
 }
 
 h1 {
@@ -182,6 +182,9 @@ p {
 }
 
 /* stars */
+/**
+twinkling stars reference: https://codepen.io/WebSonick/pen/vjmgu
+*/
 .stars,
 .stars2 {
   position: absolute;
@@ -215,21 +218,3 @@ p {
     background-position: -10000px 5000px;
   }
 }
-
-/* .pong-ball {
-  animation: change 2s linear infinite;
-} */
-/* 
-@keyframes change {
-  0% {
-    fill: red;
-  }
-
-  50% {
-    fill: blue;
-  }
-
-  75% {
-    fill: green;
-  }
-} */
