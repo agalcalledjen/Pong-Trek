@@ -37,7 +37,7 @@ This is a project produced from the following lessons from Week 5:
 * z: down
 
 **Player 2:**
-* ▲ : up
+* ▲: up
 * ▼: down
 
 ---
