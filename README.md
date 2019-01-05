@@ -14,6 +14,8 @@ This is a project produced from the following lessons from Week 5:
 
 ---
 
+![Image of Pong Trek](https://github.com/nejmal/project-03/blob/master/pong-trek.png)
+
 ## Setup
 
 **Install dependencies:**
