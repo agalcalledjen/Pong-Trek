@@ -1,22 +1,14 @@
-# Project 3 - Pong Game
+# Pong Trek 🏓
 
-A basic pong game using SVGs.
-
-
-This is a project produced from the following lessons from Week 5:
-
-1. Advanced JavaScript
-2. Intro to ES.next
-3. Developing with ES.next and Webpack
-4. Object Oriented Programming in JS
-    - OOP with ES.next
-    - Building a Pong Game 
+This is a re-creation of the classic Pong game using JavaScript and SVGs to render the board, paddles, ball, and scores.
 
 ---
 
-![Image of Pong Trek](https://github.com/nejmal/project-03/blob/master/pong-trek.png)
+![Image of Pong Trek](https://github.com/nejmal/Pong-Trek/blob/master/pong-trek.png)
 
-## Setup
+---
+
+## Installation
 
 **Install dependencies:**
 
@@ -33,16 +25,19 @@ This is a project produced from the following lessons from Week 5:
 ## Keys
 
 **Player 1:**
-* a: up
-* z: down
+
+- a: up
+- z: down
 
 **Player 2:**
-* ▲: up
-* ▼: down
+
+- ▲: up
+- ▼: down
 
 ---
 
 ## Technologies Used
+
 - HTML
 - CSS
 - JavaScript
@@ -54,16 +49,31 @@ This is a project produced from the following lessons from Week 5:
   - npm
   - Webpack
 - SVG
+
 ---
 
 ## Personal Learnings
+
+### Web Develop (Project 3)
+
+This is a project produced from the following lessons from Week 5:
+
+1. Advanced JavaScript
+2. Intro to ES.next
+3. Developing with ES.next and Webpack
+4. Object Oriented Programming in JS
+   - OOP with ES.next
+   - Building a Pong Game
+
 Below are the subsequent learning outcomes.
 
 ### Comparison Operators
+
 - == (loose)
 - === (strict, checks for typeOf)
 
 ### Switch Statement
+
 ```js
 switch(expression) {
   case x:
@@ -78,7 +88,19 @@ switch(expression) {
 ```
 
 ### Arrow Function
-- Shorter syntax for function expressions and they are not hoisted. 
+
+- Shorter syntax for function expressions and they are not hoisted.
+
 ```js
-const x = (x, y) => { return x * y };
+const x = (x, y) => {
+  return x * y;
+};
 ```
+
+---
+
+## Author
+
+[Jennifer Lam](https://github.com/nejmal), Full-Stack Developer student at [RED Academy](https://redacademy.com/vancouver/).
+
+Let's connect on [LinkedIn](https://www.linkedin.com/in/jenniferlam-/).
