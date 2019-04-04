@@ -4,23 +4,29 @@ This is a re-creation of the classic Pong game using JavaScript and SVGs to rend
 
 ---
 
-![Image of Pong Trek](https://github.com/nejmal/Pong-Trek/blob/master/pong-trek.png)
+![Image of Pong Trek](https://github.com/agalcalledjen/Pong-Trek/blob/master/pong-trek.png)
 
 ---
 
 ## Installation
 
-**Install dependencies:**
+Install dependencies.
 
-`> npm i`
+```
+npm i
+```
 
-**Run locally with Webpack Dev Server:**
+Run locally with Webpack Dev Server.
 
-`> npm start`
+```
+npm start
+```
 
-**Build for production:**
+Build for production.
 
-`> npm run build`
+```
+npm run build
+```
 
 ## Keys
 
@@ -41,13 +47,7 @@ This is a re-creation of the classic Pong game using JavaScript and SVGs to rend
 - HTML
 - CSS
 - JavaScript
-- Git
-- GitHub
-- Terminal
-  - Homebrew
-- Node.js
-  - npm
-  - Webpack
+- Webpack
 - SVG
 
 ---
@@ -101,6 +101,6 @@ const x = (x, y) => {
 
 ## Author
 
-[Jennifer Lam](https://github.com/nejmal), Full-Stack Developer student at [RED Academy](https://redacademy.com/vancouver/).
+[Jennifer Lam](https://github.com/agalcalledjen), Full-Stack Developer student at [RED Academy](https://redacademy.com/vancouver/).
 
-Let's connect on [LinkedIn](https://www.linkedin.com/in/jenniferlam-/).
+Let's connect on [LinkedIn](https://www.linkedin.com/in/agalcalledjen/).
