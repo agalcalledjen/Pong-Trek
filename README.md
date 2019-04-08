@@ -1,6 +1,6 @@
 # Pong Trek 🏓
 
-This is a re-creation of the classic Pong game using JavaScript and SVGs to render the board, paddles, ball, and scores.
+This is a [re-creation of the classic Pong game](https://agalcalledjen.github.io/Pong-Trek/) using JavaScript and SVGs to render the board, paddles, ball, and scores.
 
 ---
 
